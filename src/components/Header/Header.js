@@ -3,7 +3,7 @@ import { Navbar, Nav, Container } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import './Header.css';
-
+//Creating header component to always be visible
 const Header = () => {
   const { user } = useSelector(state => state.auth);
   const { items } = useSelector(state => state.cart);
@@ -11,7 +11,7 @@ const Header = () => {
   return (
     <Navbar bg="dark" variant="dark" expand="lg" fixed="top">
       <Container>
-        <Navbar.Brand as={Link} to="/">E-Shop</Navbar.Brand>
+        <Navbar.Brand as={Link} to="/">Mzanzi Traders</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">

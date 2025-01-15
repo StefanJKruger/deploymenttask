@@ -4,11 +4,13 @@ import { useSelector, useDispatch } from 'react-redux';
 import { removeFromCart, setShippingMethod } from '../../redux/cartSlice';
 import './CartPage.css';
 
+//Creating function for cart logic
 const CartPage = () => {
   const [showHelp, setShowHelp] = useState(false);
   const { items, shippingMethod } = useSelector(state => state.cart);
   const dispatch = useDispatch();
 
+  //Adding shipping options
   const shippingOptions = [
     { id: 'standard', name: 'Standard Shipping', price: 5.99 },
     { id: 'express', name: 'Express Shipping', price: 14.99 },
@@ -19,7 +21,7 @@ const CartPage = () => {
     const shipping = shippingMethod ? shippingOptions.find(opt => opt.id === shippingMethod).price : 0;
     return (itemsTotal + shipping).toFixed(2);
   };
-
+//Confirming cart status
   if (items.length === 0) {
     return (
       <Container className="cart-container">
@@ -48,14 +50,14 @@ const CartPage = () => {
           {items.map(item => (
             <tr key={item.id}>
               <td className="cart-item-name">{item.name}</td>
-              <td className="cart-item-price">${item.price}</td>
+              <td className="cart-item-price">R{item.price}</td>
               <td>
                 <div className="cart-quantity">
                   {item.quantity}
                 </div>
               </td>
-              <td className="cart-item-price">${(item.price * item.quantity).toFixed(2)}</td>
-              <td>
+              <td className="cart-item-price">R{(item.price * item.quantity).toFixed(2)}</td>
+              <td> 
                 <Button 
                   variant="danger" 
                   size="sm"
@@ -82,7 +84,7 @@ const CartPage = () => {
               onChange={() => dispatch(setShippingMethod(option.id))}
             />
             <label htmlFor={option.id}>
-              {option.name} (${option.price})
+              {option.name} (R{option.price})
             </label>
           </div>
         ))}
@@ -96,7 +98,7 @@ const CartPage = () => {
       </div>
 
       <div className="total-section">
-        <h3 className="total-amount">Total: ${calculateTotal()}</h3>
+        <h3 className="total-amount">Total: R{calculateTotal()}</h3>
         <Button variant="primary" className="checkout-button">
           Proceed to Checkout
         </Button>

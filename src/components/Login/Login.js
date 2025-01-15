@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { login } from '../../redux/authSlice';
 import './Login.css';
-
+//Creating login function to live on navbar
 const Login = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -17,7 +17,7 @@ const Login = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (formData.username && formData.password) {
-      // In a real app, you would validate credentials with an API
+      // In a real app, we would validate credentials with an API
       dispatch(login({ username: formData.username }));
       navigate('/');
     } else {

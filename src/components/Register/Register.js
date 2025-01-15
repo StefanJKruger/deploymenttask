@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Form, Button, Container } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import './Register.css';
-
+//Creating registration function, to live on navbar
 const Register = () => {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
@@ -13,14 +13,14 @@ const Register = () => {
     password: '',
   });
   const [errors, setErrors] = useState({});
-
+//Starting validation logic
   const validateForm = () => {
     const newErrors = {};
     
     if (!formData.firstName) newErrors.firstName = 'First name is required';
     if (!formData.surname) newErrors.surname = 'Surname is required';
     if (!formData.username) newErrors.username = 'Username is required';
-    
+    //Confirm details contain required symbols and length
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(formData.email)) {
       newErrors.email = 'Please enter a valid email address';
