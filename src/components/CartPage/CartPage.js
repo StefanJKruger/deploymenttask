@@ -4,13 +4,12 @@ import { useSelector, useDispatch } from 'react-redux';
 import { removeFromCart, setShippingMethod } from '../../redux/cartSlice';
 import './CartPage.css';
 
-//Creating function for cart logic
 const CartPage = () => {
   const [showHelp, setShowHelp] = useState(false);
+  const [showCheckoutModal, setShowCheckoutModal] = useState(false);
   const { items, shippingMethod } = useSelector(state => state.cart);
   const dispatch = useDispatch();
 
-  //Adding shipping options
   const shippingOptions = [
     { id: 'standard', name: 'Standard Shipping', price: 5.99 },
     { id: 'express', name: 'Express Shipping', price: 14.99 },
@@ -21,7 +20,12 @@ const CartPage = () => {
     const shipping = shippingMethod ? shippingOptions.find(opt => opt.id === shippingMethod).price : 0;
     return (itemsTotal + shipping).toFixed(2);
   };
-//Confirming cart status
+
+  const handleCheckout = () => {
+    setShowCheckoutModal(true);
+    
+  };
+
   if (items.length === 0) {
     return (
       <Container className="cart-container">
@@ -57,7 +61,7 @@ const CartPage = () => {
                 </div>
               </td>
               <td className="cart-item-price">R{(item.price * item.quantity).toFixed(2)}</td>
-              <td> 
+              <td>
                 <Button 
                   variant="danger" 
                   size="sm"
@@ -99,11 +103,16 @@ const CartPage = () => {
 
       <div className="total-section">
         <h3 className="total-amount">Total: R{calculateTotal()}</h3>
-        <Button variant="primary" className="checkout-button">
+        <Button 
+          variant="primary" 
+          className="checkout-button"
+          onClick={handleCheckout}
+        >
           Proceed to Checkout
         </Button>
       </div>
 
+      
       <Modal show={showHelp} onHide={() => setShowHelp(false)} className="help-modal">
         <Modal.Header closeButton>
           <Modal.Title>Shipping Information</Modal.Title>
@@ -118,11 +127,37 @@ const CartPage = () => {
           
           <div className="shipping-info">
             <h5>Express Shipping</h5>
-            <p>Delivery within 2-3 business days</p>
+            <p>Delivery within 1-2 business days</p>
             <p>Priority handling</p>
-            <p>Free reschedule</p>
+            <p>Real-time tracking updates</p>
           </div>
         </Modal.Body>
+      </Modal>
+
+      {/* Checkout confirmation modal */}
+      <Modal 
+        show={showCheckoutModal} 
+        onHide={() => setShowCheckoutModal(false)}
+        centered
+        className="checkout-modal"
+      >
+        <Modal.Header closeButton>
+          <Modal.Title>Order Confirmation</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <div className="text-center">
+            <h4>Your delivery has been placed.</h4>
+            <p>Thanks for supporting local!</p>
+          </div>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button 
+            variant="primary" 
+            onClick={() => setShowCheckoutModal(false)}
+          >
+            Continue Shopping
+          </Button>
+        </Modal.Footer>
       </Modal>
     </Container>
   );

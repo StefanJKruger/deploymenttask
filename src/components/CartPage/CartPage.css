@@ -209,3 +209,41 @@
       font-size: 16px;
     }
   }
+
+  .checkout-modal .modal-content {
+    border-radius: 8px;
+  }
+  
+  .checkout-modal .modal-header {
+    background-color: #f8f9fa;
+    border-bottom: 2px solid #dee2e6;
+  }
+  
+  .checkout-modal .modal-title {
+    color: #2c3e50;
+    font-weight: 600;
+  }
+  
+  .checkout-modal .modal-body {
+    padding: 30px 20px;
+  }
+  
+  .checkout-modal h4 {
+    color: #2c3e50;
+    margin-bottom: 15px;
+  }
+  
+  .checkout-modal p {
+    color: #6c757d;
+    font-size: 1.1em;
+  }
+  
+  .checkout-modal .modal-footer {
+    border-top: none;
+    padding: 0 20px 20px;
+    justify-content: center;
+  }
+  
+  .checkout-modal .btn-primary {
+    padding: 10px 25px;
+  }
